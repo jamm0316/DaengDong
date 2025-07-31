@@ -1,10 +1,8 @@
+# 프로젝트 개요 및 기여한 점
+# 🐶 Daengdong
+반려동물과 함꼐 여행을 계획해 보세요!
 
-# Daengdong
-
-- 강아지와 함께 떠날 플래너를 작성해보세요!
-- 여행 기록을 남기고 추억을 간직하세요
-- 특별히 기억하고싶은 기억은 포토카드로!
-## Authors
+## 💁‍♀️ Authors
 <table>
   <tr>
          <td align="center" width="16%">
@@ -40,25 +38,39 @@
     </tr>
 </table>
 
-## Tech Stack
+## ⚙️ Tech Stack
 
 **Client:** Javascript, HTML, CSS
 
 **Server:** Java, WebSocket, JSP
 
 **Database:** MySQL 
-## Archetecture
+
+## 🧱 Archetecture & Development Environment
 
 ![archtecture](https://github.com/user-attachments/assets/5350d9b2-f6d0-498c-adf9-d7e6371bb83d)
-
-## Development Environment
-
 
 `IDE` Intellij
 
 `JDK` >= 11
 
 `OS` mac, window
+
+## 🔥 해결한 문제
+### 1. ㅓㅓㅏ
+#### 문제인식
+
+#### 진단
+
+#### 판단 및 해결
+
+#### 성과
+
+---
+<br>
+<br>
+
+# 프로젝트 상세 설명
 
 ## 스크린샷
 
