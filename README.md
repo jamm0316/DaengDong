@@ -79,17 +79,16 @@
 
 ### 2. 실시간 채팅 내역 유지 이슈 해결 (WebSocket + Supabase 활용)
 #### 문제인식
-- 기존 시스템에 채팅 기능이 없어 기능 추가가 필요
-- 대화 내역이 저장되지 않아 UX 불편이 발생
+- 기존 DB설계 시 채팅 내역 저장 테이블 설계가 없었음.
+- 대화 내역이 저장되지 않아 UX 불편이 발생.
 
 #### 진단
-- DB에 채팅 테이블이 존재하지 않아, 사용자가 채팅창을 닫으면 메시지가 모두 사라짐.
 - 연속된 대화의 흐름이 단절되고, 개발된 DB 구조상 재설계 시 비용, 일정 리스크 존재
   
 #### 판단 및 해결
 - 로컬/서버 저장 방식과 외부스토리지 방식 비교 후, 기존 DB 수정 없이 확장 가능한 외부 스토리지(Supabase) 채택
 - Supabase를 활용해 채팅 메시지를 실시간 저장 및 조회 가능하도록 구현
-  <img width="921" height="260" alt="image" src="https://github.com/user-attachments/assets/eecdbff1-d7bc-4146-a845-e29d254355a3" />
+  <img width="620" alt="image" src="https://github.com/user-attachments/assets/eecdbff1-d7bc-4146-a845-e29d254355a3" />
 
 
 #### 성과
@@ -111,7 +110,8 @@
   <img width="1369" height="430" alt="image" src="https://github.com/user-attachments/assets/040e64c7-69d9-49d6-83fa-7663e9163677" />
 
 #### 성과
-✅ **외부 API 제약을 자체 기술로 극복하여, 썸네일 자동 로딩으로 UX 완성도 향상**
+- ✅ **외부 API 제약을 자체 기술로 극복하여, 썸네일 자동 로딩으로 UX 완성도 향상**<br>
+  <img width="320" alt="image" src="https://github.com/user-attachments/assets/b4bb50b5-af7b-4be8-9e67-47f942a01376" />
 
 ---
 <br>
