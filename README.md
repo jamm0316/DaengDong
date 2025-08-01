@@ -63,8 +63,8 @@
 
 #### 진단
 - 54명을 대상으로 한 설문조사 결과, 다수가 2인 이상 여행(85%)을 하며 여행 중 꿀팁(62.3%)을 중요하게 여김을 확인.
-  <img height="464" alt="image" src="https://github.com/user-attachments/assets/96a47d99-5d1e-4259-b502-67e30bfe2aea" />
-  <img height="464" alt="image" src="https://github.com/user-attachments/assets/d52c0a99-c707-411d-a5f2-86f3210d8dfd" />
+  <img height="400" alt="image" src="https://github.com/user-attachments/assets/96a47d99-5d1e-4259-b502-67e30bfe2aea" />
+  <img height="400" alt="image" src="https://github.com/user-attachments/assets/d52c0a99-c707-411d-a5f2-86f3210d8dfd" />
 
 
 
