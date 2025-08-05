@@ -59,40 +59,51 @@
 ## 🔥 해결한 문제
 ### 1. WebSocket 세션 유실 문제를 해결하기 위해 세션 식별 구조 설계
 #### 문제인식
-- 브라우저 새로고침 시 WebSocket 세션이 초기화 됨.
-- 이에 따라 사용자 정보나 채팅방의 매핑이 끊기며 메시지가 익명 사용자로 처리되는 문제 발생.
+- WebSocket 연결 시 사용자 세션 정보 미연동 현상 발생
+- 채팅방 입장 시 세션 정보 부재로 참여자 등록 실패 → 메시지 전송 실패
 
 #### 진단
-- WebSocket은 상태 비저장 프로토콜이므로 HTTP 세션과 연결이 없으면 사용자 정보 유지 불가.
+- WebSocket은 상태 비저장(Stateless) 프로토콜로 HTTP 세션 연동 불가
+- 기존 인증 서버 세션 미전달로 사용자 정보 누락
+- WebSocket 연결 단계에서 세션 정보 수신 불가로 인해 사용자 식별 실패 문제 발생
 
 #### 판단 및 해결
-- 서비스가 세션인증 방식으로 설계되어 있으므로 서버의 HTTP 세션을 WebSocket에 연동하여 해결할 수 있을 것이라 판단.
-- HttpSessionInterceptor를 통해 WebSocket연결 시, HTTP 세션에서 사용자 정보와 채팅방 ID를 추출해 WebSocketSession에 저장.
-- 별도의 WebSocketSessionManager를 설계해서 세션 ID와 유저 정보를 매핑.
-- 연결 해제 시 참여자 목록도 함께 정리하도록 구조화
+<img width="300" height="125" alt="image" src="https://github.com/user-attachments/assets/c47f5eda-ce53-4dde-a602-6543d97d25bf" />
+
+- 세션 연동 구조 설계
+  - [HttpSessionInterceptor](https://github.com/jamm0316/DaengDong/blob/main/src/main/java/com/shinhan/daengdong/chat/websocket/HttpSessionInterceptor.java)로 HTTP 세션ID, 사용자 정보 추출, WebSocketSession으로 매핑
+- 세션-사용자 매핑 레이어 도입
+  - [WebSocketSessionManager](https://github.com/jamm0316/DaengDong/blob/main/src/main/java/com/shinhan/daengdong/chat/websocket/WebSocketSessionManager.java)를 통한 세션 ID별 채팅방 ID 및 사용자 정보 매핑
+- 역할 분리 기반 모듈화 설계로 구조 개선
 
 #### 성과
 ✅ **재접속 시 사용자 식별 정확도 100%, 유지 및 모듈화된 구조로 유지보수성 향상**
+✅ **채팅방별 참여자 실시간 채팅 기능**
 
 
 ---
 
 ### 2. 실시간 채팅 내역 유지 이슈 해결 (WebSocket + Supabase 활용)
 #### 문제인식
-- 기존 DB설계 시 채팅 내역 저장 테이블 설계가 없었음.
-- 대화 내역이 저장되지 않아 UX 불편이 발생.
+- 기존 시스템에 채팅 기능 미제공
+- DB에 채팅 테이블 미존재 → 대화내용 저장 불가
+- 채팅창을 다으면 메시지 사라짐  대화 흐름 단절 발생
+- 개발이 상당히 진행된 상태 → DB 구조 변경은 비용 및 일정 지연 리스크 존재
 
 #### 진단
-- 연속된 대화의 흐름이 단절되고, 개발된 DB 구조상 재설계 시 비용, 일정 리스크 존재
+- 채팅 내역 3가지 저장 방식에 대한 특징과 장단점 비교 분석
+  <img width="612" height="173" alt="image" src="https://github.com/user-attachments/assets/34e70d7a-d1b2-43c0-878d-973d42da16e4" />
+
   
 #### 판단 및 해결
 - 로컬/서버 저장 방식과 외부스토리지 방식 비교 후, 기존 DB 수정 없이 확장 가능한 외부 스토리지(Supabase) 채택
 - Supabase를 활용해 채팅 메시지를 실시간 저장 및 조회 가능하도록 구현
-  <img width="620" alt="image" src="https://github.com/user-attachments/assets/eecdbff1-d7bc-4146-a845-e29d254355a3" />
+  <img width="347" height="269" alt="image" src="https://github.com/user-attachments/assets/36e33887-09cb-4fe1-b980-2d5ea62147d7" />
 
 
 #### 성과
 ✅ **DB 구조 변경 없이도 채팅 내역 유지 기능을 안정적으로 구현하여 UX 불편 해소**
+  <img width="422" height="280" alt="image" src="https://github.com/user-attachments/assets/f32503c2-bab6-4b4e-b5b7-afef40ddbb88" />
 
 ---
 
@@ -120,15 +131,22 @@
 - 기획 단계에서 어떤 기능이 우선되어야 할지 판단이 어려웠고, 사용자 관점에서 필요한 기능이 무엇인지 명확하지 않았음.
 
 #### 진단
-- 54명을 대상으로 한 설문조사 결과, 다수가 2인 이상 여행(85%)을 하며 여행 중 꿀팁(62.3%)을 중요하게 여김을 확인.
-  <img height="400" alt="image" src="https://github.com/user-attachments/assets/96a47d99-5d1e-4259-b502-67e30bfe2aea" />
-  <img height="400" alt="image" src="https://github.com/user-attachments/assets/d52c0a99-c707-411d-a5f2-86f3210d8dfd" />
-
-
+- 사용자 설문조사
+  - 54명을 대상으로 한 설문조사 결과, 다수가 2인 이상 여행(85%)을 하며 여행 중 꿀팁(62.3%)을 중요하게 여김을 확인.
+    <img height="400" alt="image" src="https://github.com/user-attachments/assets/96a47d99-5d1e-4259-b502-67e30bfe2aea" />
+    <img height="400" alt="image" src="https://github.com/user-attachments/assets/d52c0a99-c707-411d-a5f2-86f3210d8dfd" />
+- 실제 서비스 시장조사
+  - 시장에서 서비스되고 있는 플랫폼의 경우 여행지 정보/예약 서비스만 제공
+  - 여행 동선을 계획하고 이를 공유하는 서비스는 없음
+  - 사용자끼리 꿀팁을 공유할 수 있는 서비스는 없음
+     <img width="400" height="274" alt="image" src="https://github.com/user-attachments/assets/fbdc2341-a83e-483b-910f-c50e20b753b7" />
 
 #### 판단 및 해결
-- 실시간 여행 공유 기능(WebSocket 기반)과 계획 등록, 초대 기능, 커뮤티니 기능 등 소통 중심 기능을 우선 구현이라 판단.
-- 커뮤니티 게시판에는 꿀팁 카테고리를 별도로 구성해, 차별화된 콘텐츠 정보 제공 기능 강화로 설계.
+- 여행 계획 및 공유 기능 UI/UX제안 및 설계
+  <img width="480" height="234" alt="image" src="https://github.com/user-attachments/assets/fca9cde6-201c-4398-92b1-d055ac752a3a" />
+
+- 커뮤니티 카테고리 UI/UX 제안 및 설계
+  <img width="398" height="213" alt="image" src="https://github.com/user-attachments/assets/ddb6d08f-f4c6-4669-a3f8-9dce282ee8c8" />
 
 #### 성과
 ✅ **사용자 니즈 기반으로 기능 우선순위를 정하고 실시간 공유 및 정보 제공 기능을 설계, 구현하여 사용자 중심의 서비스 완성도 향상.**
