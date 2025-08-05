@@ -67,8 +67,8 @@
 - 기존 인증 서버 세션 미전달로 사용자 정보 누락
 - WebSocket 연결 단계에서 세션 정보 수신 불가로 인해 사용자 식별 실패 문제 발생
 
-#### 판단 및 해결
-<img width="300" height="125" alt="image" src="https://github.com/user-attachments/assets/c47f5eda-ce53-4dde-a602-6543d97d25bf" />
+#### 판단 및 해결 <br>
+<img width="300" height="125" alt="image" src="https://github.com/user-attachments/assets/c47f5eda-ce53-4dde-a602-6543d97d25bf" /><br>
 
 - 세션 연동 구조 설계
   - [HttpSessionInterceptor](https://github.com/jamm0316/DaengDong/blob/main/src/main/java/com/shinhan/daengdong/chat/websocket/HttpSessionInterceptor.java)로 HTTP 세션ID, 사용자 정보 추출, WebSocketSession으로 매핑
@@ -91,18 +91,18 @@
 - 개발이 상당히 진행된 상태 → DB 구조 변경은 비용 및 일정 지연 리스크 존재
 
 #### 진단
-- 채팅 내역 3가지 저장 방식에 대한 특징과 장단점 비교 분석
+- 채팅 내역 3가지 저장 방식에 대한 특징과 장단점 비교 분석<br>
   <img width="612" height="173" alt="image" src="https://github.com/user-attachments/assets/34e70d7a-d1b2-43c0-878d-973d42da16e4" />
 
   
 #### 판단 및 해결
 - 로컬/서버 저장 방식과 외부스토리지 방식 비교 후, 기존 DB 수정 없이 확장 가능한 외부 스토리지(Supabase) 채택
-- Supabase를 활용해 채팅 메시지를 실시간 저장 및 조회 가능하도록 구현
+- Supabase를 활용해 채팅 메시지를 실시간 저장 및 조회 가능하도록 구현<br>
   <img width="347" height="269" alt="image" src="https://github.com/user-attachments/assets/36e33887-09cb-4fe1-b980-2d5ea62147d7" />
 
 
 #### 성과
-✅ **DB 구조 변경 없이도 채팅 내역 유지 기능을 안정적으로 구현하여 UX 불편 해소**
+✅ **DB 구조 변경 없이도 채팅 내역 유지 기능을 안정적으로 구현하여 UX 불편 해소**<br>
   <img width="422" height="280" alt="image" src="https://github.com/user-attachments/assets/f32503c2-bab6-4b4e-b5b7-afef40ddbb88" />
 
 ---
@@ -117,7 +117,7 @@
 
 #### 판단 및 해결
 - 상세페이지 URL의 패턴을 분석하고 place_id 기반의 URL 동적 생성.
-- JSoup을 활용해 해당 URL의 HTML 구조를 분석, img 태그의 src 속성을 크롤링해 이미지 경로 획득.
+- JSoup을 활용해 해당 URL의 HTML 구조를 분석, img 태그의 src 속성을 크롤링해 이미지 경로 획득.<br>
   <img width="1369" height="430" alt="image" src="https://github.com/user-attachments/assets/040e64c7-69d9-49d6-83fa-7663e9163677" />
 
 #### 성과
@@ -132,20 +132,21 @@
 
 #### 진단
 - 사용자 설문조사
-  - 54명을 대상으로 한 설문조사 결과, 다수가 2인 이상 여행(85%)을 하며 여행 중 꿀팁(62.3%)을 중요하게 여김을 확인.
+  - 54명을 대상으로 한 설문조사 결과, 다수가 2인 이상 여행(85%)을 하며 여행 중 꿀팁(62.3%)을 중요하게 여김을 확인.<br>
     <img height="400" alt="image" src="https://github.com/user-attachments/assets/96a47d99-5d1e-4259-b502-67e30bfe2aea" />
     <img height="400" alt="image" src="https://github.com/user-attachments/assets/d52c0a99-c707-411d-a5f2-86f3210d8dfd" />
 - 실제 서비스 시장조사
+  <img width="400" height="274" alt="image" src="https://github.com/user-attachments/assets/fbdc2341-a83e-483b-910f-c50e20b753b7" />
   - 시장에서 서비스되고 있는 플랫폼의 경우 여행지 정보/예약 서비스만 제공
   - 여행 동선을 계획하고 이를 공유하는 서비스는 없음
-  - 사용자끼리 꿀팁을 공유할 수 있는 서비스는 없음
-     <img width="400" height="274" alt="image" src="https://github.com/user-attachments/assets/fbdc2341-a83e-483b-910f-c50e20b753b7" />
+  - 사용자끼리 꿀팁을 공유할 수 있는 서비스는 없음<br>
+     
 
 #### 판단 및 해결
-- 여행 계획 및 공유 기능 UI/UX제안 및 설계
+- 여행 계획 및 공유 기능 UI/UX제안 및 설계<br>
   <img width="480" height="234" alt="image" src="https://github.com/user-attachments/assets/fca9cde6-201c-4398-92b1-d055ac752a3a" />
 
-- 커뮤니티 카테고리 UI/UX 제안 및 설계
+- 커뮤니티 카테고리 UI/UX 제안 및 설계<br>
   <img width="398" height="213" alt="image" src="https://github.com/user-attachments/assets/ddb6d08f-f4c6-4669-a3f8-9dce282ee8c8" />
 
 #### 성과
