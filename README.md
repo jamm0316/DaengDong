@@ -63,18 +63,21 @@
 - 채팅방 입장 시 세션 정보 부재로 참여자 등록 실패 → 메시지 전송 실패
 
 #### 진단
-- WebSocket은 상태 비저장(Stateless) 프로토콜로 HTTP 세션 연동 불가
-- 기존 인증 서버 세션 미전달로 사용자 정보 누락
-- WebSocket 연결 단계에서 세션 정보 수신 불가로 인해 사용자 식별 실패 문제 발생
+- WebSocket은 **연결 상태를 유지하는 프로토콜**, 최초 HTTP Handshake 후 **HTTP 세션과 별개로 동작**
+- 기존 인증 서버의 HTTP 세션 기반으로 작동, WebsSocket 연결 시 사용자 정보 함께 전달 못함
+- 따라서, WebSocket 내에 사용자 정보 전달 구조 필요
 
 #### 판단 및 해결 <br>
 <img width="300" height="125" alt="image" src="https://github.com/user-attachments/assets/c47f5eda-ce53-4dde-a602-6543d97d25bf" /><br>
 
-- 세션 연동 구조 설계
-  - [HttpSessionInterceptor](https://github.com/jamm0316/DaengDong/blob/main/src/main/java/com/shinhan/daengdong/chat/websocket/HttpSessionInterceptor.java)로 HTTP 세션ID, 사용자 정보 추출, WebSocketSession으로 매핑
-- 세션-사용자 매핑 레이어 도입
-  - [WebSocketSessionManager](https://github.com/jamm0316/DaengDong/blob/main/src/main/java/com/shinhan/daengdong/chat/websocket/WebSocketSessionManager.java)를 통한 세션 ID별 채팅방 ID 및 사용자 정보 매핑
-- 역할 분리 기반 모듈화 설계로 구조 개선
+- **세션 연동 구조 설계**
+  - [HttpSessionInterceptor](https://github.com/jamm0316/DaengDong/blob/main/src/main/java/com/shinhan/daengdong/chat/websocket/HttpSessionInterceptor.java)를 통해 최초 HandShake 시 HTTP 세션 ID 및 사용자 정보 추출 → WebSocketSession 매핑
+- **세션-사용자 매핑 레이어 도입**
+  - [WebSocketSessionManager](https://github.com/jamm0316/DaengDong/blob/main/src/main/java/com/shinhan/daengdong/chat/websocket/WebSocketSessionManager.java)로 세션 ID 기준 채팅방, 사용자 정보 매핑
+- **접속 종료 처리 구조화**
+  - 연결 해제 시, WebSocketSession 제거, 참여자 목록 자동 정리
+- **역할 기반 모듈화 설계**
+  - 인터셉터, 매니저, 핸들러를 분리하여 구조화 → 재사용성 및 유지보수성 향상
 
 #### 성과
 ✅ **재접속 시 사용자 식별 정확도 100%, 유지 및 모듈화된 구조로 유지보수성 향상**
