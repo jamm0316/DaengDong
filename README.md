@@ -139,6 +139,7 @@
     <img height="400" alt="image" src="https://github.com/user-attachments/assets/96a47d99-5d1e-4259-b502-67e30bfe2aea" />
     <img height="400" alt="image" src="https://github.com/user-attachments/assets/d52c0a99-c707-411d-a5f2-86f3210d8dfd" />
 - 실제 서비스 시장조사
+<br>
   <img width="400" height="274" alt="image" src="https://github.com/user-attachments/assets/fbdc2341-a83e-483b-910f-c50e20b753b7" />
   - 시장에서 서비스되고 있는 플랫폼의 경우 여행지 정보/예약 서비스만 제공
   - 여행 동선을 계획하고 이를 공유하는 서비스는 없음
