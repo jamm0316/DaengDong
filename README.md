@@ -138,9 +138,8 @@
   - 54명을 대상으로 한 설문조사 결과, 다수가 2인 이상 여행(85%)을 하며 여행 중 꿀팁(62.3%)을 중요하게 여김을 확인.<br>
     <img height="400" alt="image" src="https://github.com/user-attachments/assets/96a47d99-5d1e-4259-b502-67e30bfe2aea" />
     <img height="400" alt="image" src="https://github.com/user-attachments/assets/d52c0a99-c707-411d-a5f2-86f3210d8dfd" />
-- 실제 서비스 시장조사
-<br>
-  <img width="400" height="274" alt="image" src="https://github.com/user-attachments/assets/fbdc2341-a83e-483b-910f-c50e20b753b7" />
+- 실제 서비스 시장조사<br>
+  <img width="400" height="274" alt="image" src="https://github.com/user-attachments/assets/fbdc2341-a83e-483b-910f-c50e20b753b7" /><br>
   - 시장에서 서비스되고 있는 플랫폼의 경우 여행지 정보/예약 서비스만 제공
   - 여행 동선을 계획하고 이를 공유하는 서비스는 없음
   - 사용자끼리 꿀팁을 공유할 수 있는 서비스는 없음<br>
